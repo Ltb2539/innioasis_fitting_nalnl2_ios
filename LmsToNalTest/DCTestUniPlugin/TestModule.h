@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 #define MPO_MIN 50
 #define MPO_MAX 150
+
+@interface TestModule : NSObject
 
 @property (nonatomic, strong) NSArray<NSNumber *> *xs16;
 @property (nonatomic, strong) NSArray<NSNumber *> *xs32;

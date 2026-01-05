@@ -84,8 +84,11 @@
     // 区分左右耳 这是一个耳朵的参数
     //气导
     double *ac = [self processAcArray:acArr isLeft:isLeft];
-    //骨导
-    double bc[19] = {999.0};
+    //骨导 - 初始化所有元素为 999.0
+    double bc[19];
+    for (int i = 0; i < 19; i++) {
+        bc[i] = 999.0;
+    }
     // 声调语言，中文是声调语言 0 - non-tonal; 1 - tonal
     NSInteger tonal = 1;
     // 是否有佩戴经验 0 - experienced; 1 - new
@@ -111,7 +114,10 @@
     // 助听器类型 0 - CIC; 1 - ITC; 2 - ITE; 3 - BTE
     NSInteger haType = 3;
     // 创建一个长度为19的数组，所有元素初始化为1
-    int calcCh[19] = {1};
+    int calcCh[19];
+    for (int i = 0; i < 19; i++) {
+        calcCh[i] = 1;
+    }
     
     // 调用库方法
     SetAdultChild((int)isChild, (int)birth); // 设置是否成年 生日
@@ -125,7 +131,7 @@
     double CFArray[19];
     int freqInCh[19];
     
-    CrossOverFrequencies_NL2(CFArray, 19, ac, bc, freqInCh);
+    CrossOverFrequencies_NL2(CFArray, (int)channels, ac, bc, freqInCh);
     
     setBWC((int)channels, CFArray);
     
@@ -147,6 +153,12 @@
     }
     
     NSArray<NSNumber *> *data11 = [self map19to11:data2];
+    
+    // 释放 processAcArray 分配的内存
+    if (ac != NULL) {
+        free(ac);
+        ac = NULL;
+    }
     
     NSError *error = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data11
