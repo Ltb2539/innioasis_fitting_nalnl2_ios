@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -207,6 +207,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9759EDBD245048A40076CC51;
 			remoteInfo = DCTestUniPlugin;
+		};
+		AFD885082F0B69F200DD29D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9759EDC9245048CF0076CC51 /* DCTestUniPlugin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = TEST0052450499200BC028D;
+			remoteInfo = DCTestUniPluginTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1367,6 +1374,7 @@
 			isa = PBXGroup;
 			children = (
 				9759EDCE245048CF0076CC51 /* DCTestUniPlugin.framework */,
+				AFD885092F0B69F200DD29D2 /* DCTestUniPluginTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1441,6 +1449,13 @@
 			fileType = wrapper.framework;
 			path = DCTestUniPlugin.framework;
 			remoteRef = 9759EDCD245048CF0076CC51 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AFD885092F0B69F200DD29D2 /* DCTestUniPluginTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DCTestUniPluginTests.xctest;
+			remoteRef = AFD885082F0B69F200DD29D2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1645,7 +1660,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/../SDK/libs",
+					"$(PROJECT_DIR)/SDK/libs",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1658,7 +1673,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../SDK/inc/**",
+					"$(SRCROOT)/SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1667,7 +1682,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../SDK/libs/**",
+					"$(SRCROOT)/SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1700,7 +1715,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/../SDK/libs",
+					"$(PROJECT_DIR)/SDK/libs",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1713,7 +1728,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../SDK/inc/**",
+					"$(SRCROOT)/SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1722,7 +1737,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../SDK/libs/**",
+					"$(SRCROOT)/SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";

@@ -1,31 +1,35 @@
 //
-//  LmsToNalTestTests.m
-//  LmsToNalTestTests
+//  TestModuleTests.m
+//  DCTestUniPluginTests
 //
-//  测试 lmsToNal 函数
+//  单元测试 - 测试 TestModule 中的 lmsToNal 函数
 //
 
 #import <XCTest/XCTest.h>
 #import "TestModule.h"
 
-@interface LmsToNalTestTests : XCTestCase
+@interface TestModuleTests : XCTestCase
 
 @property (nonatomic, strong) TestModule *testModule;
 
 @end
 
-@implementation LmsToNalTestTests
+@implementation TestModuleTests
 
 - (void)setUp {
     [super setUp];
+    // 在每个测试方法执行前初始化 TestModule
     self.testModule = [[TestModule alloc] init];
     XCTAssertNotNil(self.testModule, @"TestModule 初始化失败");
 }
 
 - (void)tearDown {
+    // 在每个测试方法执行后清理
     self.testModule = nil;
     [super tearDown];
 }
+
+#pragma mark - 主要测试方法
 
 - (void)testLmsToNalWithProvidedParameters {
     // 准备测试数据 - 使用用户提供的参数
@@ -181,6 +185,145 @@
         NSLog(@"");
         XCTFail(@"测试过程中发生异常: %@ - %@", exception.name, exception.reason);
     }
+}
+
+#pragma mark - 其他测试方法
+
+- (void)testLmsToNalWithLeftEar {
+    // 测试左耳的情况
+    NSLog(@"\n");
+    NSLog(@"╔════════════════════════════════════════════════════════════╗");
+    NSLog(@"║           测试左耳情况 (isLeft = YES)                      ║");
+    NSLog(@"╚════════════════════════════════════════════════════════════╝");
+    NSLog(@"");
+    
+    NSDictionary *inputParams = @{
+        @"age": @20,
+        @"gender": @1,
+        @"ac": @[
+            @45, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55
+        ],
+        @"isLeft": @YES,  // 左耳
+        @"level": @80
+    };
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:inputParams
+                                                       options:0
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"📥 输入参数:");
+    NSLog(@"   isLeft: YES (左耳)");
+    NSLog(@"   使用 ac 数组的前11个元素");
+    NSLog(@"");
+    
+    NSString *result = [self.testModule lmsToNal:jsonString];
+    
+    XCTAssertNotNil(result, @"❌ 结果不应该为 nil");
+    
+    NSData *resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *resultArray = [NSJSONSerialization JSONObjectWithData:resultData options:0 error:&error];
+    
+    NSLog(@"📤 返回结果:");
+    NSLog(@"   数组长度: %lu", (unsigned long)[resultArray count]);
+    NSLog(@"   结果数组: %@", resultArray);
+    NSLog(@"");
+    NSLog(@"✅ 左耳测试完成\n");
+}
+
+- (void)testLmsToNalWithDifferentLevels {
+    // 测试不同 level 值的情况
+    NSLog(@"\n");
+    NSLog(@"╔════════════════════════════════════════════════════════════╗");
+    NSLog(@"║           测试不同 level 值的影响                         ║");
+    NSLog(@"╚════════════════════════════════════════════════════════════╝");
+    NSLog(@"");
+    
+    NSArray *testLevels = @[@50, @60, @70, @80, @90, @100];
+    
+    NSDictionary *baseParams = @{
+        @"age": @20,
+        @"gender": @1,
+        @"ac": @[
+            @45, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55
+        ],
+        @"isLeft": @NO,
+    };
+    
+    NSLog(@"📊 将测试以下 level 值: %@", testLevels);
+    NSLog(@"");
+    
+    NSMutableDictionary *results = [NSMutableDictionary dictionary];
+    
+    for (NSNumber *level in testLevels) {
+        NSMutableDictionary *params = [baseParams mutableCopy];
+        params[@"level"] = level;
+        
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
+                                                           options:0
+                                                             error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        NSString *result = [self.testModule lmsToNal:jsonString];
+        
+        XCTAssertNotNil(result, @"❌ level=%@ 时结果不应该为 nil", level);
+        
+        NSData *resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
+        NSArray *resultArray = [NSJSONSerialization JSONObjectWithData:resultData options:0 error:&error];
+        
+        results[level] = resultArray;
+        
+        NSLog(@"   level=%@ dB: 结果数组长度=%lu", level, (unsigned long)[resultArray count]);
+    }
+    
+    NSLog(@"");
+    NSLog(@"📈 结果对比:");
+    for (NSNumber *level in testLevels) {
+        NSArray *resultArray = results[level];
+        if (resultArray && [resultArray count] > 0) {
+            NSNumber *firstValue = resultArray[0];
+            NSNumber *lastValue = resultArray[[resultArray count] - 1];
+            NSLog(@"   level=%@ dB: 第一个值=%@, 最后一个值=%@", level, firstValue, lastValue);
+        }
+    }
+    
+    NSLog(@"");
+    NSLog(@"✅ 不同 level 值测试完成\n");
+}
+
+- (void)testLmsToNalPerformance {
+    // 性能测试
+    NSDictionary *inputParams = @{
+        @"age": @20,
+        @"gender": @1,
+        @"ac": @[
+            @45, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55, @55, @55, @55, @55, @55, @55, @55, @55,
+            @55, @55
+        ],
+        @"isLeft": @NO,
+        @"level": @80
+    };
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:inputParams
+                                                       options:0
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"\n开始性能测试...\n");
+    
+    [self measureBlock:^{
+        [self.testModule lmsToNal:jsonString];
+    }];
+    
+    NSLog(@"性能测试完成\n");
 }
 
 @end

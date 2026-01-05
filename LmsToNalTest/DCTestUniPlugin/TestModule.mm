@@ -1,8 +1,10 @@
+
 //
-//  TestModule.mm
-//  LmsToNalTest
+//  TestModule.m
+//  DCTestUniPlugin
 //
-//  独立的 TestModule 实现，用于测试 lmsToNal 函数
+//  Created by XHY on 2020/4/22.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import "TestModule.h"
@@ -10,7 +12,8 @@
 
 @implementation TestModule
 
-- (instancetype)init {
+
+- (instancetype)init{
     self = [super init];
     if (self) {
         // xs16
@@ -56,8 +59,13 @@
     return self;
 }
 
+
+
 - (NSString *)lmsToNal:(NSString *)json {
-    // 将json转为对象
+    // 将json转为对象   调用NSJSONSerialization 类的 JSONObjectWithData 方法  传递三个参数
+    // 将json转为NSData UTF-8对象
+    // options 无配置0
+    // error忽略nil
     NSDictionary *inputData = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     // 读取各个参数
     NSInteger age = [inputData[@"age"] integerValue];//年龄
@@ -70,6 +78,7 @@
     NSInteger currentYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]];
     NSInteger birthYear = currentYear - age;
     NSInteger birth = birthYear * 10000 + 101; // xxxx0101
+    
     
     NSInteger isChild = (age > 18) ? 0:1;   //0成人 1小孩
     // 区分左右耳 这是一个耳朵的参数
@@ -106,6 +115,8 @@
     
     // 调用库方法
     SetAdultChild((int)isChild, (int)birth); // 设置是否成年 生日
+    
+    
     SetExperience((int)experience);// 设置佩戴经验
     SetCompSpeed((int)compSpeed);// 设置比较速度
     SetTonalLanguage((int)tonal);// 设置声调
@@ -121,6 +132,7 @@
     double ct[19];
     CompressionThreshold_NL2(ct, (int)bandwidth, (int)selection, (int)WBCT, (int)haType, (int)direction, (int)mic, calcCh);
     
+    
     double data[19] = {};
     RealEarInsertionGain_NL2(data, ac, bc, level, (int)limiting, (int)channels, (int)direction, (int)mic, ac, (int)numAids);
     
@@ -128,6 +140,7 @@
     
     NSMutableArray<NSNumber *> *data2 = [NSMutableArray arrayWithCapacity:19];
     for (int i = 0;  i<19; i++) {
+        // Round each value in data, convert it to an integer, and wrap it into an NSNumber
         // 对该值进行四舍五入
         NSNumber *roundedValue = @(round(data[i]));
         [data2 addObject:roundedValue];
@@ -137,15 +150,36 @@
     
     NSError *error = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data11
-                                                       options:NSJSONWritingPrettyPrinted
+                                                       options:NSJSONWritingPrettyPrinted  // 使用 PrettyPrinted 使 JSON 可读
                                                          error:&error];
     
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    // 释放内存
-    free(ac);
-    
     return jsonString;
+}
+
+
+
+- (NSString *)uniMap11To64:(NSString *)json {
+    NSDictionary *inputData = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    NSArray *ys11 = inputData[@"ys11"];
+    NSInteger channelCount = [inputData[@"channelCount"] integerValue];
+    BOOL isMPO = [inputData[@"isMPO"] boolValue];
+    
+    NSArray *mappedData = [self map11To64:ys11 channelCount:channelCount isMPO:isMPO];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mappedData options:0 error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)uniMap64To11:(NSString *)json {
+    NSDictionary *inputData = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    NSArray *ys64 = inputData[@"ys64"];
+    NSInteger channelCount = [inputData[@"channelCount"] integerValue];
+    BOOL isMPO = [inputData[@"isMPO"] boolValue];
+    
+    NSArray *mappedData = [self mapXTo11:ys64 channelCount:channelCount isMPO:isMPO];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mappedData options:0 error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 - (NSArray *)map19to11:(NSArray *)ys19 {
@@ -168,6 +202,18 @@
             values =[self mapWithXs:self.xs11 ys:ys11 xs2:self.xs16];
             break;
     }
+//    NSMutableArray<NSNumber *> *data2 = [NSMutableArray arrayWithCapacity:64];
+//    for (int i = 0;  i<64; i++) {
+//        NSNumber *roundedValue = 0;
+//        if (i<channelCount) {
+//            roundedValue = values[i];
+//        }
+//        if (roundedValue) {
+//            [data2 addObject:roundedValue];
+//        }
+//    }
+//
+//    return [self limitList:data2 isMPO:isMPO ];
     NSMutableArray<NSNumber *> *data2 = [NSMutableArray arrayWithCapacity:64];
     for (int i = 0; i < 64; i++) {
         if (i < channelCount) {
@@ -176,7 +222,9 @@
             [data2 addObject:@(0)];
         }
     }
+
     return [self limitList:data2 isMPO:isMPO];
+
 }
 
 - (NSArray *)mapXTo11:(NSArray *)ys channelCount:(NSInteger)channelCount isMPO:(BOOL)isMPO {
@@ -198,20 +246,23 @@
             values =[self mapWithXs:self.xs16 ys:ysSub xs2:self.xs11];
             break;
     }
-    return [self limitList:values isMPO:isMPO];
+    return [self limitList:values isMPO:isMPO ];
 }
 
-- (NSArray<NSNumber *>*)limitList:(NSArray<NSNumber *> *)list isMPO:(BOOL)isMPO {
+
+
+
+- (NSArray<NSNumber *>*)limitList:(NSArray<NSNumber *> *)list isMPO:(BOOL)isMPO{
     NSMutableArray<NSNumber *> *result  = [NSMutableArray array];
     for(NSNumber *num in list){
         int value = [num intValue];
-        if (isMPO) { // 范围[50, 150]
+        if (isMPO) { // 范围[50, 180]
             if (value < MPO_MIN) {
                 [result addObject:@(MPO_MIN)];
             } else if (value > MPO_MAX) {
                 [result addObject:@(MPO_MAX)];
             } else {
-                [result addObject:num];
+                [result addObject:num];  // 直接加入原值
             }
         } else { // 范围[0, 60]
             if (value < 0) {
@@ -219,12 +270,13 @@
             } else if (value > 60) {
                 [result addObject:@(60)];
             } else {
-                [result addObject:num];
+                [result addObject:num];  // 直接加入原值
             }
         }
     }
     return [result copy];
 }
+
 
 - (double *)processAcArray:(NSArray *)acArr isLeft:(BOOL)isLeft {
     // 创建一个可变数组的副本
@@ -242,14 +294,14 @@
     [mutableAcArr removeObjectAtIndex:0];
     
     // 创建一个长度为 9 的 double 数组
-    double *doubleArray = (double *)malloc(sizeof(double) * mutableAcArr.count);
+    double *doubleArray = (double *)malloc(sizeof(double) * mutableAcArr.count);  // 动态分配内存
     
     // 将 mutableAcArr 的值转换并存储到 double 数组中
     for (int i = 0; i < mutableAcArr.count; i++) {
         doubleArray[i] = [mutableAcArr[i] doubleValue];
     }
     
-    return doubleArray;
+    return doubleArray; // 返回 double 数组
 }
 
 // 计算两点之间的直线插值
@@ -299,6 +351,4 @@
     
     return ys2;
 }
-
-@end
 
