@@ -10,19 +10,7 @@
 		97A515BC2450499200BC028D /* TestModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 97A515BA2450499200BC028D /* TestModule.h */; };
 		97A515BD2450499200BC028D /* TestModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97A515BB2450499200BC028D /* TestModule.mm */; };
 		AFBFB6262D32659000161223 /* NAL_NL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBFB6252D32659000161223 /* NAL_NL2.framework */; };
-		AFD884FE2F0B601300DD29D2 /* DCTestUniPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD884FD2F0B601300DD29D2 /* DCTestUniPluginTests.m */; };
-		AFD884FF2F0B601300DD29D2 /* DCTestUniPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AFD885002F0B601300DD29D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9759EDB5245048A40076CC51 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9759EDBD245048A40076CC51;
-			remoteInfo = DCTestUniPlugin;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AFB46AEE2D2F9C010026DE8E /* Embed Frameworks */ = {
@@ -45,8 +33,6 @@
 		97A515BB2450499200BC028D /* TestModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestModule.mm; sourceTree = "<group>"; };
 		AFBFB6242D32650700161223 /* NAL_NL2_SDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NAL_NL2_SDK; sourceTree = "<group>"; };
 		AFBFB6252D32659000161223 /* NAL_NL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NAL_NL2.framework; path = DCTestUniPlugin/NAL_NL2_SDK/NAL_NL2.framework; sourceTree = "<group>"; };
-		AFD884FB2F0B601300DD29D2 /* DCTestUniPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCTestUniPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFD884FD2F0B601300DD29D2 /* DCTestUniPluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTestUniPluginTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +44,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFD884F82F0B601300DD29D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFD884FF2F0B601300DD29D2 /* DCTestUniPlugin.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -74,10 +52,8 @@
 			children = (
 				8536AB5F2D58FDB10002CEA9 /* NALNL2Bundle.bundle */,
 				9759EDC0245048A40076CC51 /* DCTestUniPlugin */,
-				AFD884FC2F0B601300DD29D2 /* DCTestUniPluginTests */,
 				97A515C224518A6C00BC028D /* Frameworks */,
 				8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */,
-				AFD884FB2F0B601300DD29D2 /* DCTestUniPluginTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,14 +74,6 @@
 				AFBFB6252D32659000161223 /* NAL_NL2.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AFD884FC2F0B601300DD29D2 /* DCTestUniPluginTests */ = {
-			isa = PBXGroup;
-			children = (
-				AFD884FD2F0B601300DD29D2 /* DCTestUniPluginTests.m */,
-			);
-			path = DCTestUniPluginTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,24 +109,6 @@
 			productReference = 8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AFD884FA2F0B601300DD29D2 /* DCTestUniPluginTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFD885022F0B601300DD29D2 /* Build configuration list for PBXNativeTarget "DCTestUniPluginTests" */;
-			buildPhases = (
-				AFD884F72F0B601300DD29D2 /* Sources */,
-				AFD884F82F0B601300DD29D2 /* Frameworks */,
-				AFD884F92F0B601300DD29D2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFD885012F0B601300DD29D2 /* PBXTargetDependency */,
-			);
-			name = DCTestUniPluginTests;
-			productName = DCTestUniPluginTests;
-			productReference = AFD884FB2F0B601300DD29D2 /* DCTestUniPluginTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -171,9 +121,6 @@
 				TargetAttributes = {
 					9759EDBD245048A40076CC51 = {
 						CreatedOnToolsVersion = 11.4.1;
-					};
-					AFD884FA2F0B601300DD29D2 = {
-						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -191,20 +138,12 @@
 			projectRoot = "";
 			targets = (
 				9759EDBD245048A40076CC51 /* DCTestUniPlugin */,
-				AFD884FA2F0B601300DD29D2 /* DCTestUniPluginTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9759EDBC245048A40076CC51 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFD884F92F0B601300DD29D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -222,23 +161,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFD884F72F0B601300DD29D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFD884FE2F0B601300DD29D2 /* DCTestUniPluginTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AFD885012F0B601300DD29D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9759EDBD245048A40076CC51 /* DCTestUniPlugin */;
-			targetProxy = AFD885002F0B601300DD29D2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9759EDC4245048A40076CC51 /* Debug */ = {
@@ -435,38 +358,6 @@
 			};
 			name = Release;
 		};
-		AFD885032F0B601300DD29D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = innioasis.DCTestUniPluginTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		AFD885042F0B601300DD29D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = innioasis.DCTestUniPluginTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -484,15 +375,6 @@
 			buildConfigurations = (
 				9759EDC7245048A40076CC51 /* Debug */,
 				9759EDC8245048A40076CC51 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AFD885022F0B601300DD29D2 /* Build configuration list for PBXNativeTarget "DCTestUniPluginTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFD885032F0B601300DD29D2 /* Debug */,
-				AFD885042F0B601300DD29D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
