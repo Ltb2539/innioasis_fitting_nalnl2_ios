@@ -10,6 +10,9 @@
 		97A515BC2450499200BC028D /* TestModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 97A515BA2450499200BC028D /* TestModule.h */; };
 		97A515BD2450499200BC028D /* TestModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97A515BB2450499200BC028D /* TestModule.mm */; };
 		AFBFB6262D32659000161223 /* NAL_NL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBFB6252D32659000161223 /* NAL_NL2.framework */; };
+		TEST0012450499200BC028D /* TestModuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = TEST0022450499200BC028D /* TestModuleTests.m */; };
+		TEST0032450499200BC028D /* DCTestUniPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */; };
+		TEST0042450499200BC028D /* NAL_NL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBFB6252D32659000161223 /* NAL_NL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +36,9 @@
 		97A515BB2450499200BC028D /* TestModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestModule.mm; sourceTree = "<group>"; };
 		AFBFB6242D32650700161223 /* NAL_NL2_SDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NAL_NL2_SDK; sourceTree = "<group>"; };
 		AFBFB6252D32659000161223 /* NAL_NL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NAL_NL2.framework; path = DCTestUniPlugin/NAL_NL2_SDK/NAL_NL2.framework; sourceTree = "<group>"; };
+		TEST0022450499200BC028D /* TestModuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModuleTests.m; sourceTree = "<group>"; };
+		TEST0052450499200BC028D /* DCTestUniPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCTestUniPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		TEST0062450499200BC028D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +50,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		TEST0112450499200BC028D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TEST0032450499200BC028D /* DCTestUniPlugin.framework in Frameworks */,
+				TEST0042450499200BC028D /* NAL_NL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,8 +67,10 @@
 			children = (
 				8536AB5F2D58FDB10002CEA9 /* NALNL2Bundle.bundle */,
 				9759EDC0245048A40076CC51 /* DCTestUniPlugin */,
+				TEST0072450499200BC028D /* DCTestUniPluginTests */,
 				97A515C224518A6C00BC028D /* Frameworks */,
 				8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */,
+				TEST0052450499200BC028D /* DCTestUniPluginTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +83,15 @@
 				97A515BB2450499200BC028D /* TestModule.mm */,
 			);
 			path = DCTestUniPlugin;
+			sourceTree = "<group>";
+		};
+		TEST0072450499200BC028D /* DCTestUniPluginTests */ = {
+			isa = PBXGroup;
+			children = (
+				TEST0022450499200BC028D /* TestModuleTests.m */,
+				TEST0062450499200BC028D /* Info.plist */,
+			);
+			path = DCTestUniPluginTests;
 			sourceTree = "<group>";
 		};
 		97A515C224518A6C00BC028D /* Frameworks */ = {
@@ -109,6 +135,24 @@
 			productReference = 8536AB5B2D58F9840002CEA9 /* DCTestUniPlugin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		TEST0082450499200BC028D /* DCTestUniPluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = TEST0092450499200BC028D /* Build configuration list for PBXNativeTarget "DCTestUniPluginTests" */;
+			buildPhases = (
+				TEST0102450499200BC028D /* Sources */,
+				TEST0112450499200BC028D /* Frameworks */,
+				TEST0122450499200BC028D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				TEST0132450499200BC028D /* PBXTargetDependency */,
+			);
+			name = DCTestUniPluginTests;
+			productName = DCTestUniPluginTests;
+			productReference = TEST0052450499200BC028D /* DCTestUniPluginTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -121,6 +165,10 @@
 				TargetAttributes = {
 					9759EDBD245048A40076CC51 = {
 						CreatedOnToolsVersion = 11.4.1;
+					};
+					TEST0082450499200BC028D = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 9759EDBD245048A40076CC51;
 					};
 				};
 			};
@@ -138,12 +186,20 @@
 			projectRoot = "";
 			targets = (
 				9759EDBD245048A40076CC51 /* DCTestUniPlugin */,
+				TEST0082450499200BC028D /* DCTestUniPluginTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9759EDBC245048A40076CC51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		TEST0122450499200BC028D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -161,7 +217,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		TEST0102450499200BC028D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TEST0012450499200BC028D /* TestModuleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		TEST0132450499200BC028D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9759EDBD245048A40076CC51 /* DCTestUniPlugin */;
+			targetProxy = TEST0142450499200BC028D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		TEST0142450499200BC028D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9759EDB5245048A40076CC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9759EDBD245048A40076CC51;
+			remoteInfo = DCTestUniPlugin;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin XCBuildConfiguration section */
 		9759EDC4245048A40076CC51 /* Debug */ = {
@@ -358,6 +440,161 @@
 			};
 			name = Release;
 		};
+		TEST0152450499200BC028D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DCTestUniPlugin/NAL_NL2_SDK",
+					"$(SRCROOT)/DCTestUniPlugin/NAL_NL2_SDK",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/DCTestUniPlugin",
+					"$(SRCROOT)/../SDK/inc",
+				);
+				INFOPLIST_FILE = DCTestUniPluginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/DCTestUniPlugin",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.dcloud.DCTestUniPluginTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		TEST0162450499200BC028D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DCTestUniPlugin/NAL_NL2_SDK",
+					"$(SRCROOT)/DCTestUniPlugin/NAL_NL2_SDK",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/DCTestUniPlugin",
+					"$(SRCROOT)/../SDK/inc",
+				);
+				INFOPLIST_FILE = DCTestUniPluginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/DCTestUniPlugin",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.dcloud.DCTestUniPluginTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -375,6 +612,15 @@
 			buildConfigurations = (
 				9759EDC7245048A40076CC51 /* Debug */,
 				9759EDC8245048A40076CC51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		TEST0092450499200BC028D /* Build configuration list for PBXNativeTarget "DCTestUniPluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TEST0152450499200BC028D /* Debug */,
+				TEST0162450499200BC028D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
